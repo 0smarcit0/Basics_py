@@ -1,16 +1,14 @@
-import tkinter as tk 
-from tkinter import messagebox as mb
+import tkinter as tk
 
-
-class App(tk.Frame):
+class Main(tk.Frame):
     def __init__(self,master=None):
         super().__init__(master)
         
-        self.master=master
+        self.master = master
         self.mobiliario()
-        
+       
+        #self.principal()
         self.pack()
-    
     
     def mobiliario(self):
         self.mesa1 = tk.Button(self.master,bg="orange",text="mesa1",fg="white",width=10,height=5,command=self.pedido).place(x=100,y=100)
@@ -51,24 +49,31 @@ class App(tk.Frame):
         self.title_principal=tk.Label(self.pedido_seleccion,text="plato principal",bg="lightblue",fg="white").place(x=550,y=10)
         self.title_bebida=tk.Label(self.pedido_seleccion,text="Bebida",bg="lightblue",fg="white").place(x=550,y=10)
         self.title_postre=tk.Label(self.pedido_seleccion,text="postre",bg="lightblue",fg="white").place(x=550,y=10)
-        
     
+    """def principal(self):
+       self.boton=tk.Button(self.master,bg="blue",text="prueba",width=20,height=20,command=self.prueba).place(x=100,y=100)
+        
+        
+    def prueba(self):
+        self.emergente=tk.Toplevel(self.master,bg="lightblue",width=400,height=400)
+        self.emergente.title("hola")
+        
+        self.label=tk.Label(self.emergente,bg="yellow",width=20,height=20,text="hola").place(x=50,y=10)
+        self.txt=tk.Text(self.emergente,bg="red",width=10,height=10).place(x=100,y=100)"""
+        
+        
 
 
 
 
 
+app = Main
 
-
-
-#creamos la ventana principal con sus caracteristicas
-
-app = App
-ventana =tk.Tk()
-ventana.geometry("1200x600")
-ventana.wm_title("Sistema Restaurant")
+ventana = tk.Tk()
+ventana.geometry("900x600")
+ventana.wm_title("prueba")
 ventana.config(bg="lightblue", relief="sunken", bd=30,cursor="hand2")
 app(master=ventana)
 ventana.mainloop()
-
         
+    
