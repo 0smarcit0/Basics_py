@@ -28,9 +28,9 @@ class App(tk.Frame):
         
         
     def pedido(self):
-        self.pedido_seleccion = tk.Toplevel(self.master,bg="lightblue",width=800,height=700).title("pedido")
+        self.pedido_seleccion =tk.Toplevel(self.master,bg="lightblue",width=800,height=600)
+        self.pedido_seleccion.title("hola")
         
-        self.pedido_txt=tk.Text(self.pedido_seleccion,bg="lightblue",width=30,height=20).place(x=50,y=50)
         
         """self.sopa = tk.IntVar()
         self.pollo = tk.IntVar()
@@ -43,14 +43,14 @@ class App(tk.Frame):
         
         #text de pedido
         
-        
+        self.pedido_txt=tk.Text(self.pedido_seleccion,bg="white",width=30,height=20).place(x=50,y=50)
         
         #titulo de los menus
-        self.title_menu=tk.Label(self.pedido_seleccion,text="Menú",bg="lightblue",fg="white").place(x=550,y=10)
-        self.title_entrada=tk.Label(self.pedido_seleccion,text="Entrada",bg="lightblue",fg="white").place(x=550,y=10)
-        self.title_principal=tk.Label(self.pedido_seleccion,text="plato principal",bg="lightblue",fg="white").place(x=550,y=10)
-        self.title_bebida=tk.Label(self.pedido_seleccion,text="Bebida",bg="lightblue",fg="white").place(x=550,y=10)
-        self.title_postre=tk.Label(self.pedido_seleccion,text="postre",bg="lightblue",fg="white").place(x=550,y=10)
+        self.title_menu=tk.Label(self.pedido_seleccion,text="Menú",bg="lightblue",fg="white",font=(18)).place(x=150,y=10)
+        self.title_entrada=tk.Label(self.pedido_seleccion,text="Entrada",bg="lightblue",fg="white",font=(18)).place(x=350,y=45)
+        self.title_principal=tk.Label(self.pedido_seleccion,text="plato principal",bg="lightblue",fg="white",font=(18)).place(x=425,y=45)
+        self.title_bebida=tk.Label(self.pedido_seleccion,text="Bebida",bg="lightblue",fg="white",font=(18)).place(x=540,y=45)
+        self.title_postre=tk.Label(self.pedido_seleccion,text="postre",bg="lightblue",fg="white",font=(18)).place(x=620,y=45)
         
     
 
