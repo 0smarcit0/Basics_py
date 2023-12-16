@@ -75,9 +75,21 @@ class App(tk.Frame):
         self.postre=tk.Checkbutton(self.pedido_seleccion,text="torta de chocolate", variable=self.torta,onvalue=1,offvalue=0)
         self.postre.place(x=620,y=70)
         
-        self.cargar=tk.Button(self.pedido_seleccion,text="cargar pedido",bg="orange",width=15,height=5).place(x=300,y=500)
-        self.pagar=tk.Button(self.pedido_seleccion,text="pagar",bg="green",width=15,height=5).place(x=450,y=500)
+        self.cargar=tk.Button(self.pedido_seleccion,text="cargar pedido",bg="orange",width=15,height=5)
+        self.cargar.place(x=300,y=500)
+        self.pagar=tk.Button(self.pedido_seleccion,text="pagar",bg="green",width=15,height=5)
+        self.pagar.place(x=450,y=500)
         self.eliminar=tk.Button(self.pedido_seleccion,text="eliminar pedido",bg="red",width=15,height=5).place(x=575,y=500)
+        
+        
+    def pago(self):
+        self.n1=tk.StringVar()
+        self.n2=tk.StringVar()
+        
+        self.ventana_pago=tk.Toplevel(self.master,width=800,height=700,bg="lightblue")
+        self.ventana_pago.title("pago")
+        
+        self.pagar.config(state="disabled")
         
     
 
