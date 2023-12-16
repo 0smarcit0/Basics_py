@@ -32,14 +32,16 @@ class App(tk.Frame):
         self.pedido_seleccion.title("hola")
         
         
-        """self.sopa = tk.IntVar()
+        self.sopa = tk.IntVar()
         self.pollo = tk.IntVar()
         self.pez = tk.IntVar()
         self.ensalada = tk.IntVar()
         self.refresh = tk.IntVar()
         self.cerdo = tk.IntVar()
         self.natural = tk.IntVar()
-        self.torta = tk.IntVar()"""
+        self.torta = tk.IntVar()
+        self.carne= tk.IntVar()
+        self.natural=tk.IntVar()
         
         #text de pedido
         
@@ -51,6 +53,31 @@ class App(tk.Frame):
         self.title_principal=tk.Label(self.pedido_seleccion,text="plato principal",bg="lightblue",fg="white",font=(18)).place(x=425,y=45)
         self.title_bebida=tk.Label(self.pedido_seleccion,text="Bebida",bg="lightblue",fg="white",font=(18)).place(x=540,y=45)
         self.title_postre=tk.Label(self.pedido_seleccion,text="postre",bg="lightblue",fg="white",font=(18)).place(x=620,y=45)
+        
+        
+        #botones
+        self.sopa_dia=tk.Checkbutton(self.pedido_seleccion,text="sopa del dia", variable=self.sopa,onvalue=1,offvalue=0)
+        self.sopa_dia.place(x=325,y=70)
+        self.ensalada_dia=tk.Checkbutton(self.pedido_seleccion,text="ensalada rica", variable=self.ensalada,onvalue=1,offvalue=0)
+        self.ensalada_dia.place(x=325,y=100)
+        self.plato1=tk.Checkbutton(self.pedido_seleccion,text="cerdo", variable=self.cerdo,onvalue=1,offvalue=0)
+        self.plato1.place(x=430,y=70)
+        self.plato2=tk.Checkbutton(self.pedido_seleccion,text="pollito", variable=self.pollo,onvalue=1,offvalue=0)
+        self.plato2.place(x=430,y=100)
+        self.plato3=tk.Checkbutton(self.pedido_seleccion,text="carne", variable=self.carne,onvalue=1,offvalue=0)
+        self.plato3.place(x=430,y=130)
+        self.plato4=tk.Checkbutton(self.pedido_seleccion,text="prezcado frito", variable=self.pez,onvalue=1,offvalue=0)
+        self.plato4.place(x=430,y=160)
+        self.bebida1=tk.Checkbutton(self.pedido_seleccion,text="cocacola", variable=self.refresh,onvalue=1,offvalue=0)
+        self.bebida1.place(x=530,y=70)
+        self.bebida2=tk.Checkbutton(self.pedido_seleccion,text="jugo natural", variable=self.natural,onvalue=1,offvalue=0)
+        self.bebida2.place(x=530,y=100)
+        self.postre=tk.Checkbutton(self.pedido_seleccion,text="torta de chocolate", variable=self.torta,onvalue=1,offvalue=0)
+        self.postre.place(x=620,y=70)
+        
+        self.cargar=tk.Button(self.pedido_seleccion,text="cargar pedido",bg="orange",width=15,height=5).place(x=300,y=500)
+        self.pagar=tk.Button(self.pedido_seleccion,text="pagar",bg="green",width=15,height=5).place(x=450,y=500)
+        self.eliminar=tk.Button(self.pedido_seleccion,text="eliminar pedido",bg="red",width=15,height=5).place(x=575,y=500)
         
     
 
