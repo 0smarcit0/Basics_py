@@ -77,9 +77,10 @@ class App(tk.Frame):
         
         self.cargar=tk.Button(self.pedido_seleccion,text="cargar pedido",bg="orange",width=15,height=5)
         self.cargar.place(x=300,y=500)
-        self.pagar=tk.Button(self.pedido_seleccion,text="pagar",bg="green",width=15,height=5)
+        self.pagar=tk.Button(self.pedido_seleccion,text="pagar",bg="green",width=15,height=5,command=self.pago)
         self.pagar.place(x=450,y=500)
-        self.eliminar=tk.Button(self.pedido_seleccion,text="eliminar pedido",bg="red",width=15,height=5).place(x=575,y=500)
+        self.eliminar=tk.Button(self.pedido_seleccion,text="eliminar pedido",bg="red",width=15,height=5)
+        self.eliminar.place(x=575,y=500)
         
         
     def pago(self):
@@ -90,6 +91,35 @@ class App(tk.Frame):
         self.ventana_pago.title("pago")
         
         self.pagar.config(state="disabled")
+        
+        
+        self.detalle = tk.Text(self.ventana_pago, bg="orange",width=20,height=20)
+        self.detalle.place(x=90,y=50)
+        
+        self.factura = tk.Label(self.ventana_pago,text="desarrollo de factura",bg="lightblue",fg="white")
+        self.factura.place(x=90,y=20)
+        self.cliente = tk.Label(self.ventana_pago,text="Razón social:",bg="lightblue",fg="white")
+        self.cliente.place(x=350,y=50)
+        self.documento = tk.Label(self.ventana_pago,text="C.I / RIF: ",bg="lightblue",fg="white")
+        self.documento.place(x=350,y=90)
+        self.forma_pago = tk.Label(self.ventana_pago,text="Formas de pago",bg="lightblue",fg="white")
+        self.forma_pago.place(x=400,y=450)
+        
+        
+        self.entrada1=tk.Entry(self.ventana_pago,textvariable=self.n1)
+        self.entrada1.place(x=460,y=50)
+        self.entrada2=tk.Entry(self.ventana_pago,textvariable=self.n2)
+        self.entrada2.place(x=460,y=80)
+        
+        self.efectivo=tk.Button(self.ventana_pago,text="pago en efectivo",bg="green",width=15,height=5)
+        self.efectivo.place(x=250,y=500)
+        self.electronico=tk.Button(self.ventana_pago,text="pago electronico",bg="green",width=15,height=5)
+        self.electronico.place(x=400,y=500)
+        self.imprimir=tk.Button(self.ventana_pago,text="imprimir",bg="orange",width=15,height=5)
+        self.imprimir.place(x=550,y=500)
+        
+        
+        
         
     
 
