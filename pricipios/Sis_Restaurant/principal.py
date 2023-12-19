@@ -1,6 +1,9 @@
 import tkinter as tk 
 from tkinter import messagebox as mb
-
+from io import open
+from tkinter import ttk
+from datetime import datetime
+import restaurantbd
 
 class App(tk.Frame):
     def __init__(self,master=None):
@@ -8,17 +11,19 @@ class App(tk.Frame):
         
         self.master=master
         self.mobiliario()
+        self.conectar = restaurantbd.Restaurant()
+        
         
         self.pack()
     
     
     def mobiliario(self):
-        self.mesa1 = tk.Button(self.master,bg="orange",text="mesa1",fg="white",width=10,height=5,command=self.pedido).place(x=100,y=100)
-        self.mesa2 = tk.Button(self.master,bg="orange",text="mesa2",fg="white",width=10,height=5).place(x=200,y=100)
-        self.mesa3 = tk.Button(self.master,bg="orange",text="mesa3",fg="white",width=10,height=5).place(x=300,y=100)
-        self.mesa4 = tk.Button(self.master,bg="orange",text="mesa4",fg="white",width=10,height=5).place(x=100,y=200)
-        self.mesa5 = tk.Button(self.master,bg="orange",text="mesa5",fg="white",width=10,height=5).place(x=200,y=200)
-        self.mesa6 = tk.Button(self.master,bg="orange",text="mesa6",fg="white",width=10,height=5).place(x=300,y=200)
+        self.mesa1 = tk.Button(self.master,bg="orange",text="mesa1",fg="white",width=10,height=5,command=lambda:self.pedido(1)).place(x=100,y=100)
+        self.mesa2 = tk.Button(self.master,bg="orange",text="mesa2",fg="white",width=10,height=5,command=lambda:self.pedido(2)).place(x=200,y=100)
+        self.mesa3 = tk.Button(self.master,bg="orange",text="mesa3",fg="white",width=10,height=5,command=lambda:self.pedido(3)).place(x=300,y=100)
+        self.mesa4 = tk.Button(self.master,bg="orange",text="mesa4",fg="white",width=10,height=5,command=lambda:self.pedido(4)).place(x=100,y=200)
+        self.mesa5 = tk.Button(self.master,bg="orange",text="mesa5",fg="white",width=10,height=5,command=lambda:self.pedido(5)).place(x=200,y=200)
+        self.mesa6 = tk.Button(self.master,bg="orange",text="mesa6",fg="white",width=10,height=5,command=lambda:self.pedido(6)).place(x=300,y=200)
         
         self.generar = tk.Button(self.master,bg="green",text="generar reporte de caja",fg="white",width=17,height=6).place(x=100,y=450)
         self.salir = tk.Button(self.master,bg="red",text="salir del programa",fg="white",width=15,height=6,command=self.master.destroy).place(x=250,y=450)
@@ -27,7 +32,7 @@ class App(tk.Frame):
         self.cocina = tk.Button(self.master,bg="brown",fg="white",text="cocina",width=8,height=20,state="disabled").place(x=800,y=0)
         
         
-    def pedido(self):
+    def pedido(self,n_mesa):
         self.pedido_seleccion =tk.Toplevel(self.master,bg="lightblue",width=800,height=600)
         self.pedido_seleccion.title("hola")
         
@@ -43,10 +48,20 @@ class App(tk.Frame):
         self.carne= tk.IntVar()
         self.natural=tk.IntVar()
         
-        #text de pedido
+        #creamos el widget treevie que almacenara el pedido cargado en la mesa
         
-        self.pedido_txt=tk.Text(self.pedido_seleccion,bg="white",width=30,height=20).place(x=50,y=50)
+        columns =("cant. ","descrip.","P. Unit.","Tot")
+        self.pedido_carga = ttk.Treeview(self.pedido_seleccion,height=20,columns=columns,show="headings")
+        self.pedido_carga.grid(row=0,column=0,sticky="news")
+        #se estandariza el Treeview, asignando las columnas
+        for col in columns:
+            self.pedido_carga.heading(col,text=col)
+            self.pedido_carga.column(col,width=100,anchor=tk.CENTER)
         
+        #se inserta el scrollbar en formar vertical al treeview de forma que si el pedido es mas grande se pueda visualizar 
+        self.barra_bajada=tk.Scrollbar(self.pedido_seleccion,orient=tk.VERTICAL,command=self.pedido_seleccion.yview)
+        self.barra_bajada.grid(row=0,column=1,sticky="ns")
+        self.pedido_carga.config(yscrollcommand=self.barra_bajada.set)
         #titulo de los menus
         self.title_menu=tk.Label(self.pedido_seleccion,text="Menú",bg="lightblue",fg="white",font=(18)).place(x=150,y=10)
         self.title_entrada=tk.Label(self.pedido_seleccion,text="Entrada",bg="lightblue",fg="white",font=(18)).place(x=350,y=45)
@@ -74,6 +89,31 @@ class App(tk.Frame):
         self.bebida2.place(x=530,y=100)
         self.postre=tk.Checkbutton(self.pedido_seleccion,text="torta de chocolate", variable=self.torta,onvalue=1,offvalue=0)
         self.postre.place(x=620,y=70)
+        
+        #creamos el combobox
+        self.cantidad_sopa = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
+        self.cantidad_sopa.place(x=550,y=120)
+        self.cantidad_ensalada = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
+        self.cantidad_ensalada.place(x=550,y=170)
+        self.cantidad_plato1 = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
+        self.cantidad_plato1.place(x=650,y=120)
+        self.cantidad_plato2 = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
+        self.cantidad_plato2.place(x=650,y=170)
+        self.cantidad_plato3 = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
+        self.cantidad_plato3.place(x=650,y=230)
+        self.cantidad_plato4 = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
+        self.cantidad_plato4.place(x=650,y=290)
+        self.cantidad_bebida1 = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
+        self.cantidad_bebida1.place(x=800,y=120)
+        self.cantidad_bebida2 = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
+        self.cantidad_bebida2.place(x=800,y=170)
+        self.cantidad_postre = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
+        self.cantidad_postre.place(x=900,y=120)
+        
+        #mostrar en treeview lso platos cargados previaente para la mesa seleccionada
+        
+        
+        
         
         self.cargar=tk.Button(self.pedido_seleccion,text="cargar pedido",bg="orange",width=15,height=5)
         self.cargar.place(x=300,y=500)
