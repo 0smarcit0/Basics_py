@@ -32,9 +32,10 @@ class App(tk.Frame):
         self.cocina = tk.Button(self.master,bg="brown",fg="white",text="cocina",width=8,height=20,state="disabled").place(x=800,y=0)
         
         
-    def pedido(self,n_mesa):
-        self.pedido_seleccion =tk.Toplevel(self.master,bg="lightblue",width=800,height=600)
+    def pedido(self,numero_mesa):
+        self.pedido_seleccion =tk.Toplevel(self.master,bg="lightblue",width=800,height=600,)
         self.pedido_seleccion.title("hola")
+        
         
         
         self.sopa = tk.IntVar()
@@ -48,7 +49,7 @@ class App(tk.Frame):
         self.carne= tk.IntVar()
         self.natural=tk.IntVar()
         
-        #creamos el widget treevie que almacenara el pedido cargado en la mesa
+        #creamos el widget treeview que almacenara el pedido cargado en la mesa
         
         columns =("cant. ","descrip.","P. Unit.","Tot")
         self.pedido_carga = ttk.Treeview(self.pedido_seleccion,height=20,columns=columns,show="headings")
@@ -59,7 +60,7 @@ class App(tk.Frame):
             self.pedido_carga.column(col,width=100,anchor=tk.CENTER)
         
         #se inserta el scrollbar en formar vertical al treeview de forma que si el pedido es mas grande se pueda visualizar 
-        self.barra_bajada=tk.Scrollbar(self.pedido_seleccion,orient=tk.VERTICAL,command=self.pedido_seleccion.yview)
+        self.barra_bajada=tk.Scrollbar(self.pedido_seleccion,orient=tk.VERTICAL,command=self.pedido_carga.yview)
         self.barra_bajada.grid(row=0,column=1,sticky="ns")
         self.pedido_carga.config(yscrollcommand=self.barra_bajada.set)
         #titulo de los menus
@@ -72,57 +73,195 @@ class App(tk.Frame):
         
         #botones
         self.sopa_dia=tk.Checkbutton(self.pedido_seleccion,text="sopa del dia", variable=self.sopa,onvalue=1,offvalue=0)
-        self.sopa_dia.place(x=325,y=70)
+        self.sopa_dia.place(x=420,y=70)
         self.ensalada_dia=tk.Checkbutton(self.pedido_seleccion,text="ensalada rica", variable=self.ensalada,onvalue=1,offvalue=0)
-        self.ensalada_dia.place(x=325,y=100)
+        self.ensalada_dia.place(x=520,y=70)
         self.plato1=tk.Checkbutton(self.pedido_seleccion,text="cerdo", variable=self.cerdo,onvalue=1,offvalue=0)
-        self.plato1.place(x=430,y=70)
+        self.plato1.place(x=620,y=70)
         self.plato2=tk.Checkbutton(self.pedido_seleccion,text="pollito", variable=self.pollo,onvalue=1,offvalue=0)
-        self.plato2.place(x=430,y=100)
+        self.plato2.place(x=720,y=70)
         self.plato3=tk.Checkbutton(self.pedido_seleccion,text="carne", variable=self.carne,onvalue=1,offvalue=0)
-        self.plato3.place(x=430,y=130)
+        self.plato3.place(x=820,y=70)
         self.plato4=tk.Checkbutton(self.pedido_seleccion,text="prezcado frito", variable=self.pez,onvalue=1,offvalue=0)
-        self.plato4.place(x=430,y=160)
+        self.plato4.place(x=920,y=70)
         self.bebida1=tk.Checkbutton(self.pedido_seleccion,text="cocacola", variable=self.refresh,onvalue=1,offvalue=0)
-        self.bebida1.place(x=530,y=70)
+        self.bebida1.place(x=670,y=140)
         self.bebida2=tk.Checkbutton(self.pedido_seleccion,text="jugo natural", variable=self.natural,onvalue=1,offvalue=0)
-        self.bebida2.place(x=530,y=100)
+        self.bebida2.place(x=560,y=140)
         self.postre=tk.Checkbutton(self.pedido_seleccion,text="torta de chocolate", variable=self.torta,onvalue=1,offvalue=0)
-        self.postre.place(x=620,y=70)
+        self.postre.place(x=420,y=140)
         
         #creamos el combobox
         self.cantidad_sopa = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
-        self.cantidad_sopa.place(x=550,y=120)
+        self.cantidad_sopa.place(x=420,y=100)
         self.cantidad_ensalada = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
-        self.cantidad_ensalada.place(x=550,y=170)
+        self.cantidad_ensalada.place(x=520,y=100)
         self.cantidad_plato1 = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
-        self.cantidad_plato1.place(x=650,y=120)
+        self.cantidad_plato1.place(x=620,y=100)
         self.cantidad_plato2 = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
-        self.cantidad_plato2.place(x=650,y=170)
+        self.cantidad_plato2.place(x=720,y=100)
         self.cantidad_plato3 = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
-        self.cantidad_plato3.place(x=650,y=230)
+        self.cantidad_plato3.place(x=820,y=100)
         self.cantidad_plato4 = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
-        self.cantidad_plato4.place(x=650,y=290)
+        self.cantidad_plato4.place(x=920,y=100)
         self.cantidad_bebida1 = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
-        self.cantidad_bebida1.place(x=800,y=120)
+        self.cantidad_bebida1.place(x=670,y=180)
         self.cantidad_bebida2 = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
-        self.cantidad_bebida2.place(x=800,y=170)
+        self.cantidad_bebida2.place(x=560,y=180)
         self.cantidad_postre = ttk.Combobox(self.pedido_seleccion,values=[1,2,3,4,5,6,7,8,9,10],width=10,height=10)
-        self.cantidad_postre.place(x=900,y=120)
+        self.cantidad_postre.place(x=420,y=180)
         
         #mostrar en treeview lso platos cargados previaente para la mesa seleccionada
         
+        recepcion_platos =self.conectar.cargar_plato_treeview(numero_mesa)
+        #limpiamos el treeview
+        for i in self.pedido_carga.get_children():
+            self.pedido_carga.delete(i)
+            
+        for i in recepcion_platos:
+            self.pedido_carga.insert("","end",value=i)
         
         
-        
-        self.cargar=tk.Button(self.pedido_seleccion,text="cargar pedido",bg="orange",width=15,height=5)
+        self.cargar=tk.Button(self.pedido_seleccion,text="cargar pedido",bg="orange",width=15,height=5,command=lambda:self.cargar_pedido(numero_mesa))
         self.cargar.place(x=300,y=500)
         self.pagar=tk.Button(self.pedido_seleccion,text="pagar",bg="green",width=15,height=5,command=self.pago)
         self.pagar.place(x=450,y=500)
         self.eliminar=tk.Button(self.pedido_seleccion,text="eliminar pedido",bg="red",width=15,height=5)
         self.eliminar.place(x=575,y=500)
         
+    
+    def cargar_pedido(self,numero_mesa):
+        bandera_seleccionado = 0
+        bandera_cantidad = 0
+        enviar=[]
+        cantidad=[]
+        recepcion="esta vacia"
         
+        datos =(self.sopa.get(),self.ensalada.get(),self.cerdo.get(),self.pollo.get(),self.carne.get(),
+                self.pez.get(),self.refresh.get(),self.natural.get(),self.torta.get())
+        
+        cantidades=(self.cantidad_sopa.get(),self.cantidad_ensalada.get(),self.cantidad_plato1.get(),
+                    self.cantidad_plato2.get(),self.cantidad_plato3.get(),self.cantidad_plato4.get(),
+                    self.cantidad_bebida1.get(),self.cantidad_bebida2.get(),self.cantidad_postre.get(),)
+        
+        for i in datos:
+            for j in cantidades:
+                
+                if i == self.sopa.get() and (self.sopa.get()) and j == self.cantidad_sopa.get() and (self.cantidad_sopa.get()):
+                    enviar.append(1) 
+                    self.sopa.set(0) 
+                    cantidad.append(self.cantidad_sopa.get()) 
+                    self.cantidad_sopa.set('') 
+                    bandera_seleccionado = 1 
+                    
+                elif (self.sopa.get()) and not (self.cantidad_sopa.get()) or not (self.sopa.get()) and (self.cantidad_sopa.get()): 
+                    bandera_cantidad = 1 
+                    bandera_seleccionado = 1 
+                
+                elif i == self.ensalada.get() and (self.ensalada.get()) and j == self.cantidad_ensalada.get() and (self.cantidad_ensalada.get()): 
+                    enviar.append(2) 
+                    self.ensalada.set(0) 
+                    cantidad.append(self.cantidad_ensalada.get()) 
+                    self.cantidad_ensalada.set('') 
+                    bandera_seleccionado = 1 
+                    
+                elif (self.ensalada.get()) and not (self.cantidad_ensalada.get()) or not (self.ensalada.get()) and (self.cantidad_ensalada.get()):
+                    bandera_cantidad = 1 
+                    bandera_seleccionado = 1 
+                
+                elif i == self.carne.get() and (self.carne.get()) and j == self.cantidad_plato1.get() and (self.cantidad_plato1.get()): 
+                    enviar.append(3) 
+                    self.carne.set(0) 
+                    cantidad.append(self.cantidad_plato1.get()) 
+                    self.cantidad_plato1.set('') 
+                    bandera_seleccionado = 1 
+                    
+                elif (self.carne.get()) and not (self.cantidad_plato1.get()) or not (self.carne.get()) and (self.cantidad_plato1.get()): 
+                    bandera_cantidad = 1 
+                    bandera_seleccionado = 1 
+                    
+                elif i == self.pollo.get() and (self.pollo.get()) and j == self.cantidad_plato2.get() and (self.cantidad_plato2.get()):
+                    enviar.append(4) 
+                    self.pollo.set(0) 
+                    cantidad.append(self.cantidad_plato2.get()) 
+                    self.cantidad_plato2.set('') 
+                    bandera_seleccionado = 1 
+                    
+                elif (self.pollo.get()) and not (self.cantidad_plato2.get()) or not (self.pollo.get()) and (self.cantidad_plato2.get()): 
+                    bandera_cantidad = 1 
+                    bandera_seleccionado = 1 
+                    
+                elif i == self.cerdo.get() and (self.cerdo.get()) and j == self.cantidad_plato3.get() and (self.cantidad_plato3.get()):
+                    enviar.append(5) 
+                    self.cerdo.set(0) 
+                    cantidad.append(self.cantidad_plato3.get()) 
+                    self.cantidad_plato3.set('') 
+                    bandera_seleccionado = 1 
+                    
+                elif (self.cerdo.get()) and not (self.cantidad_plato3.get()) or not (self.cerdo.get()) and (self.cantidad_plato3.get()): 
+                    bandera_cantidad = 1 
+                    bandera_seleccionado = 1 
+                    
+                elif i == self.pez.get() and (self.pez.get()) and j == self.cantidad_plato4.get() and (self.cantidad_plato4.get()):
+                    enviar.append(6) 
+                    self.pez.set(0) 
+                    cantidad.append(self.cantidad_plato4.get()) 
+                    self.cantidad_plato4.set('')
+                    bandera_seleccionado = 1 
+                    
+                elif (self.pez.get()) and not (self.cantidad_plato4.get()) or not (self.pez.get()) and (self.cantidad_plato4.get()):
+                    bandera_cantidad = 1 
+                    bandera_seleccionado = 1 
+                    
+                elif i == self.refresh.get() and (self.refresh.get()) and j == self.cantidad_bebida1.get() and (self.cantidad_bebida1.get()):
+                    enviar.append(7) 
+                    self.refresh.set(0) 
+                    cantidad.append(self.cantidad_bebida1.get()) 
+                    self.cantidad_bebida1.set('') 
+                    bandera_seleccionado = 1 
+                    
+                elif (self.refresh.get()) and not (self.cantidad_bebida1.get()) or not (self.refresh.get()) and (self.cantidad_bebida1.get()):
+                    bandera_cantidad = 1 
+                    bandera_seleccionado = 1 
+                elif i == self.natural.get() and (self.natural.get()) and j == self.cantidad_bebida2.get() and (self.cantidad_bebida2.get()):
+                    enviar.append(8) 
+                    self.natural.set(0) 
+                    cantidad.append(self.cantidad_bebida2.get()) 
+                    self.cantidad_bebida2.set('') 
+                    bandera_seleccionado = 1 
+                elif (self.natural.get()) and not (self.cantidad_bebida2.get()) or not (self.natural.get()) and (self.cantidad_bebida2.get()):
+                    bandera_cantidad = 1 
+                    bandera_seleccionado = 1 
+                elif i == self.torta.get() and (self.torta.get()) and j == self.cantidad_postre.get() and (self.cantidad_postre.get()):
+                    enviar.append(9) 
+                    self.torta.set(0) 
+                    cantidad.append(self.cantidad_postre.get()) 
+                    self.cantidad_postre.set('')
+                    bandera_seleccionado = 1 
+                elif (self.torta.get()) and not (self.cantidad_postre.get()) or not (self.torta.get()) and (self.cantidad_postre.get()):
+                    bandera_cantidad = 1 
+                    bandera_seleccionado = 1 
+                
+        if bandera_seleccionado == 0: 
+           mb.showinfo("Información", "Debe Seleccionar algún Plato") 
+                
+        elif bandera_cantidad == 1: 
+           mb.showerror("Error", "Ingrese todas las Cantidades") 
+                
+        else: 
+          cargar_datos = (enviar, cantidad) 
+          recepcion = self.conectar.cargar(cargar_datos, numero_mesa) 
+          
+          for i in self.pedido_carga.get_children(): 
+            self.pedido_carga.delete(i) 
+          for i in recepcion:
+            self.pedido_carga.insert('', 'end', value = i) 
+          
+        bandera_cantidad = 0 
+          
+        bandera_seleccionado = 0
+                    
+            
     def pago(self):
         self.n1=tk.StringVar()
         self.n2=tk.StringVar()
@@ -159,17 +298,6 @@ class App(tk.Frame):
         self.imprimir.place(x=550,y=500)
         
         
-        
-        
-    
-
-
-
-
-
-
-
-
 #creamos la ventana principal con sus caracteristicas
 
 app = App
